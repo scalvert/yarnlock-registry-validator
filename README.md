@@ -1,5 +1,7 @@
 ## yarnlock registry validator
 
+![CI Build](https://github.com/scalvert/yarnlock-registry-validator/workflows/CI%20Build/badge.svg)
+
 A simple CLI that validates a yarn.lock contains a unique registry origin.
 
 ### Installation
