@@ -1,0 +1,23 @@
+{
+  "name": "yarnlock-registry-validator",
+  "version": "0.0.1",
+  "description": "Validates single registry source in yarn.lock",
+  "main": "index.js",
+  "author": "Steve Calvert <steve.calvert@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "yarnlock-registry-validator": "./bin/yarnlock-registry-validator"
+  },
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "dependencies": {
+    "@yarnpkg/lockfile": "^1.1.0",
+    "whatwg-url": "^7.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "execa": "^4.0.2",
+    "mocha": "^6.1.4"
+  }
+}
