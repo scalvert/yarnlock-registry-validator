@@ -16,6 +16,12 @@ The following command will ensure that there's only one, unique registry origin 
 
 ```sh
 yarnlock-registry-validator ./yarn.lock
+
+# Valid:
+# yarnlock-registry-validator: The "./fixtures/yarn.lock" lockfile was valid and contains only one, unique registry origin: https://registry.yarnpkg.com
+
+# Invalid:
+# yarnlock-registry-validator: The "./fixtures/invalid-yarn.lock" lockfile was invalid and contained multiple registry origins: https://registry.yarnpkg.com, https://registry.npmjs.org
 ```
 
 ### Attribution
