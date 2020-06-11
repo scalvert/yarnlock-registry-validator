@@ -13,11 +13,11 @@ async function main([file]) {
   let [valid, registries] = validate(fs.readFileSync(file, 'UTF8'));
 
   if (!valid) {
-    console.error(`yarnlock-registry-validator: The "${file}" lockfile was invalid and contained multiple registry entries: ${[...registries].join(', ')}`);
+    console.error(`yarnlock-registry-validator: The "${file}" lockfile was invalid and contained multiple registry origins: ${[...registries].join(', ')}`);
     process.exit(1);
   }
 
-  console.log(`yarnlock-registry-validator: The "${file}" lockfile was valid and contains only one, unique registry entry: ${[...registries].join(', ')}`);
+  console.log(`yarnlock-registry-validator: The "${file}" lockfile was valid and contains only one, unique registry origin: ${[...registries].join(', ')}`);
   process.exit(0);
 }
 

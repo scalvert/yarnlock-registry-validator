@@ -31,7 +31,7 @@ describe('yarnlock-registry-validator', () => {
     ]);
 
     expect(child.stdout).to.eql(
-      `yarnlock-registry-validator: The "./fixtures/yarn.lock" lockfile was valid and contains only one, unique registry entry: https://registry.yarnpkg.com`
+      `yarnlock-registry-validator: The "./fixtures/yarn.lock" lockfile was valid and contains only one, unique registry origin: https://registry.yarnpkg.com`
     );
 
     expect(child.stderr).to.eql('');
@@ -45,7 +45,7 @@ describe('yarnlock-registry-validator', () => {
       ]);
     } catch (error) {
       expect(error.stderr).to.eql(
-        `yarnlock-registry-validator: The "./fixtures/invalid-yarn.lock" lockfile was invalid and contained multiple registry entries: https://registry.yarnpkg.com, https://registry.npmjs.org`
+        `yarnlock-registry-validator: The "./fixtures/invalid-yarn.lock" lockfile was invalid and contained multiple registry origins: https://registry.yarnpkg.com, https://registry.npmjs.org`
       );
 
       expect(error.stdout).to.eql('');
