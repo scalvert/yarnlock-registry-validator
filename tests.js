@@ -63,10 +63,40 @@ describe('yarnlock-registry-validator', () => {
     expect(child.exitCode).to.eql(0);
   });
 
+  it('CLI works for valid lockfile with registry argument', () => {
+    const child = execa.sync(`./bin/yarnlock-registry-validator`, [
+      './fixtures/yarn.lock',
+      'https://registry.yarnpkg.com',
+    ]);
+
+    expect(child.stdout).to.eql(
+      `yarnlock-registry-validator: The "./fixtures/yarn.lock" lockfile was valid and contains only one, unique registry origin: https://registry.yarnpkg.com`
+    );
+
+    expect(child.stderr).to.eql('');
+    expect(child.exitCode).to.eql(0);
+  });
+
   it('CLI works for invalid lockfile', () => {
     try {
       execa.sync(`./bin/yarnlock-registry-validator`, [
         './fixtures/invalid-yarn.lock',
+      ]);
+    } catch (error) {
+      expect(error.stderr).to.eql(
+        `yarnlock-registry-validator: The "./fixtures/invalid-yarn.lock" lockfile was invalid and contained multiple registry origins: https://registry.yarnpkg.com, https://registry.npmjs.org`
+      );
+
+      expect(error.stdout).to.eql('');
+      expect(error.exitCode).to.eql(1);
+    }
+  });
+
+  it('CLI works for invalid lockfile with registry argument', () => {
+    try {
+      execa.sync(`./bin/yarnlock-registry-validator`, [
+        './fixtures/invalid-yarn.lock',
+        'https://registry.yarnpkg.com',
       ]);
     } catch (error) {
       expect(error.stderr).to.eql(
