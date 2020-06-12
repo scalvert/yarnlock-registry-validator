@@ -1,6 +1,6 @@
 {
   "name": "yarnlock-registry-validator",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Validates unique registry origin in yarn.lock",
   "license": "MIT",
   "author": "Steve Calvert <steve.calvert@gmail.com>",
