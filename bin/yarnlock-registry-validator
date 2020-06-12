@@ -4,36 +4,45 @@
 const fs = require('fs');
 const validate = require('../lib/validator');
 
-async function main([file]) {
+async function main([file, registry]) {
   if (!fs.existsSync(file)) {
     console.log(help());
     process.exit(1);
   }
 
-  let [valid, registries] = validate(fs.readFileSync(file, 'UTF8'));
+  let [valid, registries] = validate(fs.readFileSync(file, 'UTF8'), registry);
 
   if (!valid) {
-    console.error(`yarnlock-registry-validator: The "${file}" lockfile was invalid and contained multiple registry origins: ${[...registries].join(', ')}`);
+    console.error(
+      `yarnlock-registry-validator: The "${file}" lockfile was invalid and contained multiple registry origins: ${[
+        ...registries,
+      ].join(', ')}`
+    );
     process.exit(1);
   }
 
-  console.log(`yarnlock-registry-validator: The "${file}" lockfile was valid and contains only one, unique registry origin: ${[...registries].join(', ')}`);
+  console.log(
+    `yarnlock-registry-validator: The "${file}" lockfile was valid and contains only one, unique registry origin: ${[
+      ...registries,
+    ].join(', ')}`
+  );
   process.exit(0);
 }
 
 function help() {
   return `
-  usage: yarnlock-registry-validator <lockfile>
+  usage: yarnlock-registry-validator <lockfile> [registry]
     lockfile: path to the lockfile you  wish to update
+    registry: optional unique registry you wish to check for
 
   Example:
     yarnlock-registry-validator ./yarn.lock
-  `
+  `;
 }
 
-main(process.argv.slice(2)).catch(e => {
+main(process.argv.slice(2)).catch((e) => {
   if (typeof e === 'object' && e !== null) {
-    console.error(e.message || e)
+    console.error(e.message || e);
   }
   console.log(help());
   process.exit(1);
