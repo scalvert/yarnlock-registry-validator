@@ -2,9 +2,10 @@
   "name": "yarnlock-registry-validator",
   "version": "0.0.1",
   "description": "Validates unique registry origin in yarn.lock",
-  "main": "index.js",
-  "author": "Steve Calvert <steve.calvert@gmail.com>",
   "license": "MIT",
+  "author": "Steve Calvert <steve.calvert@gmail.com>",
+  "repository": "https://github.com/scalvert/yarnlock-registry-validator",
+  "main": "index.js",
   "bin": {
     "yarnlock-registry-validator": "./bin/yarnlock-registry-validator"
   },
@@ -18,6 +19,26 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "execa": "^4.0.2",
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "release-it": "^13.1.1",
+    "release-it-lerna-changelog": "^2.1.0"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   }
 }
