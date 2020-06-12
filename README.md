@@ -12,6 +12,15 @@ yarn global add yarnlock-registry-validator
 
 ### Usage
 
+```sh
+usage: yarnlock-registry-validator <lockfile> [registry]
+  lockfile: path to the lockfile you  wish to update
+  registry: optional unique registry you wish to check for
+
+example:
+  yarnlock-registry-validator ./yarn.lock
+```
+
 The following command will ensure that there's only one, unique registry origin in the provided lockfile.
 
 ```sh

@@ -35,7 +35,7 @@ function help() {
     lockfile: path to the lockfile you  wish to update
     registry: optional unique registry you wish to check for
 
-  Example:
+  example:
     yarnlock-registry-validator ./yarn.lock
   `;
 }
