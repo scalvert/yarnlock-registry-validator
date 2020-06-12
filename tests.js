@@ -14,12 +14,37 @@ describe('yarnlock-registry-validator', () => {
     expect(registries.size).to.eql(1);
   });
 
+  it('validates if a lockfile contains one specific registry', () => {
+    const validLockfile = fs.readFileSync('./fixtures/yarn.lock', 'UTF8');
+    const [valid, registries] = validate(
+      validLockfile,
+      'https://registry.yarnpkg.com'
+    );
+
+    expect(valid).to.be.true;
+    expect(registries.size).to.eql(1);
+  });
+
   it('validates if a lockfile contains multiple registry entries', () => {
     const invalidLockfile = fs.readFileSync(
       './fixtures/invalid-yarn.lock',
       'UTF8'
     );
     const [valid, registries] = validate(invalidLockfile);
+
+    expect(valid).to.be.false;
+    expect(registries.size).to.eql(2);
+  });
+
+  it('validates if a lockfile contains multiple registry entries but expecting one specific registry', () => {
+    const invalidLockfile = fs.readFileSync(
+      './fixtures/invalid-yarn.lock',
+      'UTF8'
+    );
+    const [valid, registries] = validate(
+      invalidLockfile,
+      'https://registry.yarnpkg.com'
+    );
 
     expect(valid).to.be.false;
     expect(registries.size).to.eql(2);
